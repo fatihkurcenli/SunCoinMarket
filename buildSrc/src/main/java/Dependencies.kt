@@ -83,3 +83,7 @@ object Firebase {
     const val coroutinesPlayServices =
         "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${VersionsLb.coroutinesPlayServices}"
 }
+
+object ApiUrl {
+    const val apiUrl = "https://api.coingecko.com/api/v3/"
+}

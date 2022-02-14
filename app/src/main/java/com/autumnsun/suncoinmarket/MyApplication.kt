@@ -15,13 +15,14 @@ class MyApplication : Application() {
 
     private fun initTimber() {
         if (BuildConfig.DEBUG) {
-            Timber.plant(
+            Timber.plant(Timber.DebugTree())
+            /*Timber.plant(
                 object : Timber.DebugTree() {
                     override fun createStackElementTag(element: StackTraceElement): String {
                         return "(${element.fileName}:${element.lineNumber}:${Thread.currentThread().name})#${element.methodName}"
                     }
                 }
-            )
+            )*/
         }
     }
 }
