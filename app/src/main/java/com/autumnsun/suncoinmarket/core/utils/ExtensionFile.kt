@@ -6,6 +6,7 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import java.text.DecimalFormat
 import kotlin.math.log10
 import kotlin.math.pow
@@ -26,3 +27,4 @@ fun Context.hideKeyboard(view: View) {
 fun Fragment.hideKeyboard() {
     view?.let { activity?.hideKeyboard(it) }
 }
+

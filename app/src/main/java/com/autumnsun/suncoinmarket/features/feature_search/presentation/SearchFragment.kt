@@ -6,9 +6,7 @@ import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.autumnsun.suncoinmarket.R
 import com.autumnsun.suncoinmarket.core.base.BaseFragment
 import com.autumnsun.suncoinmarket.core.utils.hideKeyboard
@@ -29,22 +27,20 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         searchWidget()
         binding.searchRecyclerview.adapter = searchAdapter
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.searchState.collectLatest { state ->
-                    if (state.isLoading) {
-                        binding.loadingProgressBar.isVisible = true
-                        binding.searchRecyclerview.isVisible = false
-                    } else {
-                        if (state.coins.isNotEmpty()) {
-                            binding.loadingProgressBar.isVisible = false
-                            binding.searchRecyclerview.isVisible = true
-                            searchAdapter.submitList(state.coins)
-                            searchAdapter.notifyDataSetChanged()
-                        }
-                        if (state.error.isNotBlank()) {
-                            Snackbar.make(binding.root, state.error, Snackbar.LENGTH_SHORT)
-                                .setAnimationMode(Snackbar.ANIMATION_MODE_FADE).show()
-                        }
+            viewModel.searchState.collectLatest { state ->
+                if (state.isLoading) {
+                    binding.loadingProgressBar.isVisible = true
+                    binding.searchRecyclerview.isVisible = false
+                } else {
+                    if (state.coins.isNotEmpty()) {
+                        binding.loadingProgressBar.isVisible = false
+                        binding.searchRecyclerview.isVisible = true
+                        searchAdapter.submitList(state.coins)
+                        searchAdapter.notifyDataSetChanged()
+                    }
+                    if (state.error.isNotBlank()) {
+                        Snackbar.make(binding.root, state.error, Snackbar.LENGTH_SHORT)
+                            .setAnimationMode(Snackbar.ANIMATION_MODE_FADE).show()
                     }
                 }
             }

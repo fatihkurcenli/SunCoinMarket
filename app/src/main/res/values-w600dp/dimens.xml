@@ -1,0 +1,7 @@
+<resources>
+    <dimen name="fab_margin">48dp</dimen>
+    <dimen name="margin_min">4dp</dimen>
+    <dimen name="margin_medium">8dp</dimen>
+    <dimen name="margin_big">16dp</dimen>
+    <dimen name="margin_max">24dp</dimen>
+</resources>
