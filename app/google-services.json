@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "600018602965",
+    "project_id": "suncoinmarket",
+    "storage_bucket": "suncoinmarket.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600018602965:android:14de9321cc2da971564b5c",
+        "android_client_info": {
+          "package_name": "com.autumnsun.suncoinmarket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "600018602965-jj5tqb7avi6t32hpge2q5hoh228739p9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIdX3KbLJ6PSWLT2F34ijX_AUuhOj9mqg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "600018602965-jj5tqb7avi6t32hpge2q5hoh228739p9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

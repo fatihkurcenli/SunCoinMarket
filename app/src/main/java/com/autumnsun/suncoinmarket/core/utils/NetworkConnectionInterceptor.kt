@@ -15,6 +15,7 @@ class NetworkConnectionInterceptor(private val context: Context) : Interceptor {
         }
         val builder: Request.Builder = chain.request().newBuilder()
         return chain.proceed(builder.build())
+        
     }
 
     inner class NoConnectionException : IOException() {

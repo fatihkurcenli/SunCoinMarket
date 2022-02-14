@@ -5,14 +5,13 @@ import android.content.SharedPreferences
 import com.autumnsun.suncoinmarket.BuildConfig
 import com.autumnsun.suncoinmarket.core.utils.Constants.CONNECT_TIMEOUT
 import com.autumnsun.suncoinmarket.core.utils.Constants.READ_TIMEOUT
+import com.autumnsun.suncoinmarket.core.utils.Constants.SHARED_PREFERENCES_NAME
 import com.autumnsun.suncoinmarket.core.utils.Constants.WRITE_TIMEOUT
 import com.autumnsun.suncoinmarket.core.utils.NetworkConnectionInterceptor
 import com.autumnsun.suncoinmarket.data.remote.CryptoApi
 import com.autumnsun.suncoinmarket.features.feature_search.data.repository.SearchRepositoryImp
 import com.autumnsun.suncoinmarket.features.feature_search.domain.repository.SearchRepository
 import com.autumnsun.suncoinmarket.features.feature_search.domain.use_case.SearchQueryUseCase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,21 +29,10 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-
-    /* @Provides
-     @Singleton
-     fun provideChatRepository(
-         db: FirebaseFirestore,
-         auth: FirebaseAuth,
-         sp: SharedPreferences
-     ): ChatRepository {
-         return ChatAppImpl(db, auth, dataStore)
-     }*/
-
     @Singleton
     @Provides
     fun provideSharedPreference(@ApplicationContext context: Context): SharedPreferences {
-        return context.getSharedPreferences("shared_preferences", Context.MODE_PRIVATE)
+        return context.getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)
     }
 
     @Provides
@@ -100,14 +88,4 @@ object AppModule {
     fun provideApiService(retrofit: Retrofit): CryptoApi {
         return retrofit.create(CryptoApi::class.java)
     }
-
-    /*@Provides
-    @Singleton
-    @ExperimentalPagingApi
-    fun provideSearchRepository(
-        api: SearchApi,
-        @ApplicationContext context: Context
-    ): SearchRepository {
-        return SearchRepositoryImp(api, context)
-    }*/
 }
