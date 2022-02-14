@@ -51,7 +51,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_big"
             android:layout_marginBottom="@dimen/margin_big"
             app:layout_constraintTop_toBottomOf="@+id/layoutEmail">
 
@@ -90,10 +90,11 @@
             android:padding="@dimen/margin_medium"
             android:text="@string/not_a_member"
             android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btnRegister"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+            app:layout_constraintTop_toBottomOf="@+id/layoutPassword" />
 
         <TextView
             android:id="@+id/btnRegister"

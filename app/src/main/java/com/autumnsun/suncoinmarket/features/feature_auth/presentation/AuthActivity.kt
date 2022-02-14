@@ -9,10 +9,10 @@ import androidx.navigation.ui.navigateUp
 import com.autumnsun.suncoinmarket.R
 import com.autumnsun.suncoinmarket.databinding.ActivityAuthBinding
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.scopes.ActivityScoped
 
 @AndroidEntryPoint
 class AuthActivity : AppCompatActivity() {
-
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityAuthBinding
 
@@ -20,17 +20,14 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.auth_fragment_nav_graph) as NavHostFragment
         val navController = navHostFragment.navController
         appBarConfiguration = AppBarConfiguration(navController.graph)
-
     }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.auth_fragment_nav_graph)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }

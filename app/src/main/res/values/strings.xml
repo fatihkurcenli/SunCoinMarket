@@ -21,4 +21,7 @@
     <string name="sign_up_now">Sign Up Now</string>
     <string name="not_a_member">Not a member?</string>
     <string name="register">Register</string>
+    <string name="user_name">User Name</string>
+    <string name="sign_in_now">Sign in Now</string>
+    <string name="you_already_have_an_account">You already have an Account ?</string>
 </resources>
