@@ -1,6 +1,7 @@
 package com.autumnsun.suncoinmarket.core.utils
 
 import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterInside
@@ -57,5 +58,14 @@ fun ImageView.largeImageUrl(
             .apply(RequestOptions().override(600, 300))
             .transition(DrawableTransitionOptions.withCrossFade())
             .into(this)
+    }
+}
+
+@BindingAdapter(value = ["intToString"])
+fun AppCompatTextView.intToString(
+    intValue: Int
+) {
+    intValue.let {
+        this.text = intValue.toString()
     }
 }

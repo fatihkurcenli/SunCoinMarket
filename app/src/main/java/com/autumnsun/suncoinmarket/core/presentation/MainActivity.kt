@@ -1,10 +1,11 @@
-package com.autumnsun.suncoinmarket.presentation
+package com.autumnsun.suncoinmarket.core.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.autumnsun.suncoinmarket.R
 import com.autumnsun.suncoinmarket.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -16,15 +17,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
-    lateinit var bottomNavBar: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        bottomNavBar = binding.navBottomNavigationView
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
+        binding.navBottomNavigationView.setupWithNavController(navController)
         appBarConfiguration = AppBarConfiguration(
             topLevelDestinationIds = setOf(
                 R.id.homeFragment,

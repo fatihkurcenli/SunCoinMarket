@@ -21,11 +21,16 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField 'String', 'API_URL', "\"${ApiUrl.apiUrl}\""
+        }
         release {
+            buildConfigField 'String', 'API_URL', "\"${ApiUrl.apiUrl}\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -52,6 +57,7 @@ dependencies {
     implementation AndroidDependencies.navFragmentLib
     implementation AndroidDependencies.navUiLib
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     // LeakCanary
     debugImplementation LeakCanaryDependencies.leakcanaryLib

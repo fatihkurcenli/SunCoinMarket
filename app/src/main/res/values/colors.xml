@@ -12,4 +12,5 @@
     <color name="selected_bottom_color">#FF82c24a</color>
     <color name="gray_scale">#74FFFFFF</color>
     <color name="colorGreyLt">#AD87868A</color>
+    <color name="gray_background_color_weight">#919191</color>
 </resources>
