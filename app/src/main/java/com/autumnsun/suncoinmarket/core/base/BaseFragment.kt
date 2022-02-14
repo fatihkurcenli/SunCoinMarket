@@ -8,6 +8,7 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 
 abstract class BaseFragment<T : ViewDataBinding>(
     @LayoutRes private val layoutRes: Int
@@ -32,6 +33,12 @@ abstract class BaseFragment<T : ViewDataBinding>(
         initializeUi()
         return binding.root
     }
+
+    open fun showSnackBar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT)
+            .setAnimationMode(Snackbar.ANIMATION_MODE_FADE).show()
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()

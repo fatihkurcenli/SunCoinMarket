@@ -87,3 +87,7 @@ object Firebase {
 object ApiUrl {
     const val apiUrl = "https://api.coingecko.com/api/v3/"
 }
+
+object Lottie {
+    const val lottieAnimation = "com.airbnb.android:lottie:${VersionsLb.lottieVersion}"
+}

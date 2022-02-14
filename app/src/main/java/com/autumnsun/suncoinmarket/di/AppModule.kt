@@ -30,17 +30,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-    @Provides
-    @Singleton
-    fun provideFirebaseAuth(): FirebaseAuth {
-        return FirebaseAuth.getInstance()
-    }
-
-    @Provides
-    @Singleton
-    fun provideFirebaseDb(): FirebaseFirestore {
-        return FirebaseFirestore.getInstance()
-    }
 
     /* @Provides
      @Singleton

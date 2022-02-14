@@ -47,4 +47,7 @@ object VersionsLb {
     const val firebaseFirestore = "24.0.1"
     const val coroutinesPlayServices = "1.4.1"
 
+    //lottie
+    const val lottieVersion = "4.2.1"
+
 }

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/margin_medium"
+        tools:context=".ui.entry.register.RegisterFragment">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/ic_app_logo"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="@dimen/margin_max"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_rawRes="@raw/register" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutMail"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margin_max"
+            app:layout_constraintTop_toBottomOf="@+id/ic_app_logo">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtMail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_email_24"
+                android:drawablePadding="@dimen/margin_min"
+                android:hint="@string/e_mail"
+                android:inputType="textEmailAddress"
+                app:errorEnabled="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margin_medium"
+            app:layout_constraintTop_toBottomOf="@+id/layoutMail">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_password_svg"
+                android:drawablePadding="@dimen/margin_min"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                app:errorEnabled="true"
+                app:passwordToggleEnabled="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_big"
+            android:text="@string/register"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutPassword" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
