@@ -6,4 +6,5 @@ object Constants {
     const val WRITE_TIMEOUT = 120L
     const val FIREBASE_COLLECTION_USERS = "users"
     const val SHARED_PREFERENCES_NAME = "shared_preferences"
+    const val PER_PAGE = 20
 }

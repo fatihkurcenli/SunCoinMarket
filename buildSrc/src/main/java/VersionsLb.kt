@@ -53,4 +53,7 @@ object VersionsLb {
     //chart
     const val chartVersion = "6.0.0"
 
+    //pagination
+    const val pagingVersion = "3.1.0"
+
 }

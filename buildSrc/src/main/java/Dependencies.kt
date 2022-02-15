@@ -95,3 +95,7 @@ object Lottie {
 object ChartLibrary {
     const val chart = "com.github.AAChartModel:AAChartCore-Kotlin:${VersionsLb.chartVersion}"
 }
+
+object PaginationLibrary {
+    const val pagination = "androidx.paging:paging-runtime-ktx:${VersionsLb.pagingVersion}"
+}

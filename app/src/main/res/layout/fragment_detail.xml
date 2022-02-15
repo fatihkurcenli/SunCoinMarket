@@ -12,11 +12,16 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/detail_background">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/tool_bar"
+                layout="@layout/detail_tool_bar" />
 
             <include
                 android:id="@+id/loading_progress_bar"
@@ -30,12 +35,11 @@
                 android:id="@+id/main_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/detail_background"
                 android:orientation="vertical"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tool_bar"
                 tools:context=".features.feature_detail.presentation.DetailFragment">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
