@@ -1,15 +1,17 @@
 package com.autumnsun.suncoinmarket.features.feature_auth.presentation.sign_up
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.autumnsun.suncoinmarket.R
 import com.autumnsun.suncoinmarket.core.base.BaseFragment
+import com.autumnsun.suncoinmarket.core.presentation.MainActivity
 import com.autumnsun.suncoinmarket.databinding.FragmentRegisterBinding
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.scopes.ActivityScoped
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -21,7 +23,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnRegister.setOnClickListener {
+        binding.registerButton.setOnClickListener {
             viewModel.register(
                 binding.edtMail.text.toString(),
                 binding.edtPassword.text.toString(),
@@ -29,23 +31,29 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>(R.layout.fragment
             )
         }
 
+        binding.loginButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
         lifecycleScope.launch {
             viewModel.registerState.collectLatest { state ->
                 if (state.isLoading) {
+                    binding.registerButton.isVisible = false
                     Timber.d("Tag", "loading")
-                    binding.loadingProgressBar.isVisible = true
-                    binding.btnRegister.isVisible = false
+                    binding.loadingProgressBar.customLoadingAnimation.isVisible = true
                 } else {
                     if (state.successMessage.isNotBlank()) {
                         showSnackBar(state.successMessage)
-                        binding.loadingProgressBar.isVisible = false
-                        binding.btnRegister.isVisible = true
-                        Timber.d("Tag", "LoginSucces navigation code")
+                        Intent(requireActivity(), MainActivity::class.java).apply {
+                            startActivity(this)
+                        }
+                        binding.registerButton.isVisible = true
+                        binding.loadingProgressBar.customLoadingAnimation.isVisible = false
                     }
                     if (state.errorMessage.isNotBlank()) {
                         showSnackBar(state.errorMessage)
-                        binding.loadingProgressBar.isVisible = false
-                        binding.btnRegister.isVisible = true
+                        binding.loadingProgressBar.customLoadingAnimation.isVisible = false
+                        binding.registerButton.isVisible = true
                     }
                 }
             }

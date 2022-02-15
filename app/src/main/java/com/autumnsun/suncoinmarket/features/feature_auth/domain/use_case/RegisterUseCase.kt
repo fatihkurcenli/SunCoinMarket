@@ -18,11 +18,11 @@ class RegisterUseCase(
             emit(Resource.Loading())
             val response = authRepository.registerEmail(email, password, userName)
             if (response.data != null && response.data) {
-                emit(Resource.Success(data = "Kayıt Başarılı"))
+                emit(Resource.Success(data = "Register Success"))
             }
             response.message?.let {
                 if (response.message.isNotBlank()) {
-                    emit(Resource.Error("Kayıt oluşturulamadı ${response.message}"))
+                    emit(Resource.Error("${response.message}"))
                 }
             }
         }
