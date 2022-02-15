@@ -6,18 +6,6 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
-import com.google.android.material.snackbar.Snackbar
-import java.text.DecimalFormat
-import kotlin.math.log10
-import kotlin.math.pow
-
-fun Long.readableFormat(): String {
-    if (this <= 0) return "0"
-    val units = arrayOf("B", "kB", "MB", "GB", "TB")
-    val digitGroups = (log10(this.toDouble()) / log10(1024.0)).toInt()
-    return DecimalFormat("#,##0.#").format(this / 1024.0.pow(digitGroups.toDouble()))
-        .toString() + " " + units[digitGroups]
-}
 
 fun Context.hideKeyboard(view: View) {
     val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -28,3 +16,26 @@ fun Fragment.hideKeyboard() {
     view?.let { activity?.hideKeyboard(it) }
 }
 
+fun View.toggleAlpha(isShow: Boolean, delay: Long = 200, invisibleMode: Int = View.GONE) {
+    if (isShow) animateAlpha(View.VISIBLE, delay) else animateAlpha(invisibleMode, delay)
+}
+
+fun View.animateAlpha(visibility: Int, delay: Long = 200) {
+    if (visibility == View.VISIBLE) {
+        setVisibility(View.VISIBLE)
+    }
+
+    val alpha = when (visibility) {
+        View.GONE, View.INVISIBLE -> 0f
+        View.VISIBLE -> 1f
+        else -> 1f
+    }
+
+    animate().apply {
+        duration = delay
+        alpha(alpha)
+        withEndAction {
+            setVisibility(visibility)
+        }
+    }
+}

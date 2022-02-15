@@ -4,7 +4,7 @@ data class CoinDetail(
     val name: String,
     val symbol: String,
     val description: Description,
-    val hashingAlgorithm: String?,
+    val hashingAlgorithm: String,
     val image: Image,
     val marketData: MarketData,
     val lastUpdated: String,
