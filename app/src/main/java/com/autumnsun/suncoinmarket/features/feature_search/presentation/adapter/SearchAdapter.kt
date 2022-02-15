@@ -5,13 +5,15 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.autumnsun.suncoinmarket.features.feature_search.data.remote.search_model.Coin
 
-class SearchAdapter : ListAdapter<Coin, SearchViewHolder>(COIN_COMPARATOR) {
+class SearchAdapter(
+    private val coinClickEvent: (Coin) -> Unit
+) : ListAdapter<Coin, SearchViewHolder>(COIN_COMPARATOR) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         return SearchViewHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position),coinClickEvent)
     }
 
     companion object {

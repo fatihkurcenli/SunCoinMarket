@@ -10,8 +10,11 @@ class SearchViewHolder(
     private val binding: SearchListItemBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(cryptoModel: Coin) {
+    fun bind(cryptoModel: Coin, coinClickEvent: (Coin) -> Unit) {
         binding.coin = cryptoModel
+        binding.root.setOnClickListener {
+            coinClickEvent(cryptoModel)
+        }
     }
 
     companion object {

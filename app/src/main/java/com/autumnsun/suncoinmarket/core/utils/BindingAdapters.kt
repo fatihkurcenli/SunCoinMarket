@@ -3,6 +3,7 @@ package com.autumnsun.suncoinmarket.core.utils
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.databinding.BindingAdapter
+import com.autumnsun.suncoinmarket.R
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -68,4 +69,11 @@ fun AppCompatTextView.intToString(
     intValue.let {
         this.text = intValue.toString()
     }
+}
+
+@BindingAdapter("setArrow")
+fun ImageView.setArrow(
+    getCoinData: Double
+) {
+    this.setBackgroundResource(if (getCoinData > 0) R.drawable.ic_arrow_up else R.drawable.ic_arrow_down)
 }

@@ -13,4 +13,5 @@
     <color name="gray_scale">#74FFFFFF</color>
     <color name="colorGreyLt">#AD87868A</color>
     <color name="gray_background_color_weight">#919191</color>
+    <color name="detail_background">#F9FBFC</color>
 </resources>

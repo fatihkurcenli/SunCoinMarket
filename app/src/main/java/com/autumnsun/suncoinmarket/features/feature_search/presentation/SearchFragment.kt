@@ -7,6 +7,9 @@ import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.autumnsun.suncoinmarket.R
 import com.autumnsun.suncoinmarket.core.base.BaseFragment
 import com.autumnsun.suncoinmarket.core.utils.hideKeyboard
@@ -19,24 +22,34 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_search) {
-    private var searchAdapter = SearchAdapter()
+    private var searchAdapter = SearchAdapter {
+        val navDirectionAction =
+            SearchFragmentDirections.actionSearchFragmentToDetailFragment(it)
+        findNavController().navigate(navDirectionAction)
+    }
     private val viewModel by viewModels<SearchViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         searchWidget()
-        binding.searchRecyclerview.adapter = searchAdapter
+        binding.searchRecyclerview.apply {
+            adapter = searchAdapter
+            addItemDecoration(
+                (DividerItemDecoration(
+                    requireActivity(), LinearLayoutManager.VERTICAL
+                ))
+            )
+        }
         lifecycleScope.launch {
             viewModel.searchState.collectLatest { state ->
                 if (state.isLoading) {
-                    binding.loadingProgressBar.isVisible = true
+                    binding.loadingProgressBar.customLoadingAnimation.isVisible = true
                     binding.searchRecyclerview.isVisible = false
                 } else {
                     if (state.coins.isNotEmpty()) {
-                        binding.loadingProgressBar.isVisible = false
+                        binding.loadingProgressBar.customLoadingAnimation.isVisible = false
                         binding.searchRecyclerview.isVisible = true
                         searchAdapter.submitList(state.coins)
-                        searchAdapter.notifyDataSetChanged()
                     }
                     if (state.error.isNotBlank()) {
                         Snackbar.make(binding.root, state.error, Snackbar.LENGTH_SHORT)
