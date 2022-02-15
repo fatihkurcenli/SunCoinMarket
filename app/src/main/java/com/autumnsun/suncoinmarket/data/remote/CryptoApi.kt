@@ -12,6 +12,6 @@ interface CryptoApi {
     @GET("search")
     suspend fun searchCrypto(@Query("query") searchCrypto: String): Response<SearchCoinDto>
 
-    @GET("coins/{id}/sparkline=true")
+    @GET("coins/{id}?sparkline=true")
     suspend fun getCoinByID(@Path("id") id: String): Response<CoinDetailDto>
 }

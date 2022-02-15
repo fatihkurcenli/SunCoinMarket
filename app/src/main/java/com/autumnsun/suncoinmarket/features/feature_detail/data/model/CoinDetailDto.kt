@@ -12,7 +12,7 @@ data class CoinDetailDto(
     @SerializedName("description")
     val description: DescriptionDto,
     @SerializedName("hashing_algorithm")
-    val hashingAlgorithm: String?,
+    val hashingAlgorithm: String,
     @SerializedName("image")
     val image: ImageDto,
     @SerializedName("market_data")
