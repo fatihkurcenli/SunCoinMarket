@@ -103,6 +103,9 @@ dependencies {
 
     //chart
     implementation ChartLibrary.chart
+
+    //pagination
+    implementation PaginationLibrary.pagination
 }
 
 ktlint {

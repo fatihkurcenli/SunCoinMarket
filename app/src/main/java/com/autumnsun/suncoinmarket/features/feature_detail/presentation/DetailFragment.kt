@@ -1,6 +1,7 @@
 package com.autumnsun.suncoinmarket.features.feature_detail.presentation
 
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -40,9 +41,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
                         binding.coinDetailModel = state.detailModel
                         binding.apply {
                             mainLayout.isVisible = true
-                            //chartView.aa_drawChartWithChartModel(setLineChart(state.detailModel))
                             setLineChart(state.detailModel)
-                            //chartView.aa_drawChartWithChartModel(setLineChart(state.detailModel))
                             loadingProgressBar.customLoadingAnimation.isVisible = false
                             mainCard.animateAlpha(View.VISIBLE, 1000L)
                         }
@@ -72,6 +71,12 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
             return AAChartModel()
                 .chartType(AAChartType.Scatter)
                 .title(detailModel.name)
+                .backgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        R.color.detail_background
+                    )
+                )
                 .subtitle(detailModel.symbol)
                 .yAxisGridLineWidth(0f)
                 .stacking(AAChartStackingType.Normal)

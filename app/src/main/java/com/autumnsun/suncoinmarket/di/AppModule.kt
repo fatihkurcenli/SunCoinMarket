@@ -88,4 +88,10 @@ object AppModule {
     fun provideApiService(retrofit: Retrofit): CryptoApi {
         return retrofit.create(CryptoApi::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideApplicationContext(@ApplicationContext context: Context): Context {
+        return context
+    }
 }
