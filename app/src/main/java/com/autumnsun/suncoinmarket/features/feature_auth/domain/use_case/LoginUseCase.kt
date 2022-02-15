@@ -2,10 +2,8 @@ package com.autumnsun.suncoinmarket.features.feature_auth.domain.use_case
 
 import com.autumnsun.suncoinmarket.core.util.Resource
 import com.autumnsun.suncoinmarket.features.feature_auth.domain.repository.AuthRepository
-import dagger.hilt.android.scopes.ActivityScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import javax.inject.Inject
 
 
 class LoginUseCase(
@@ -19,11 +17,11 @@ class LoginUseCase(
         emit(Resource.Loading())
         val response = authRepository.loginEmail(email, password)
         if (response.data != null && response.data) {
-            emit(Resource.Success(data = "Giriş Başarılı"))
+            emit(Resource.Success(data = "Success Login"))
         }
         response.message?.let {
             if (response.message.isNotBlank()) {
-                emit(Resource.Error("Giriş yapılamadı ${response.message}"))
+                emit(Resource.Error("${response.message}"))
             }
         }
     }

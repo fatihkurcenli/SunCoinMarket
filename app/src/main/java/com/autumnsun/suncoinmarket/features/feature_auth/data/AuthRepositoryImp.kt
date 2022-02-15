@@ -27,8 +27,19 @@ class AuthRepositoryImp @Inject constructor(
             firebaseAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener {
                 operationSuccessful = true
             }.await()
-            Timber.d("userInfo", firebaseAuth.currentUser?.uid!!)
-            operationSuccessful = false
+            var token = ""
+            firebaseAuth.getAccessToken(true).addOnSuccessListener {
+                sharedPreferences.edit().putString("token", it.token).apply()
+                token = it.token.toString()
+            }.await()
+            firebaseAuth.currentUser?.uid?.let {
+                firebaseDb.collection(FIREBASE_COLLECTION_USERS).document(it).update("token", token)
+                    .addOnSuccessListener {
+                        operationSuccessful = true
+                    }.addOnFailureListener {
+                        Timber.d("Error for update token !")
+                    }
+            }
             Resource.Success(operationSuccessful)
         } catch (e: Exception) {
             operationSuccessful = false
@@ -60,18 +71,13 @@ class AuthRepositoryImp @Inject constructor(
                     password = password,
                     token = token
                 )
-                firebaseDb.collection(FIREBASE_COLLECTION_USERS)
-                    .document(userid)
-                    .set(obj).addOnSuccessListener {
+                firebaseDb.collection(FIREBASE_COLLECTION_USERS).document(userid).set(obj)
+                    .addOnSuccessListener {
                     }.await()
-                Timber.d("userInfoSuccessful", firebaseAuth.currentUser?.uid!!)
                 Resource.Success(operationSuccessful)
             } else {
-                Timber.d("userInfoUnsuccessful", firebaseAuth.currentUser?.uid!!)
-                Resource.Success(operationSuccessful)
+                Resource.Error("Server Error!")
             }
-            Timber.d("userInfo", firebaseAuth.currentUser?.uid!!)
-            Resource.Success(operationSuccessful)
         } catch (e: Exception) {
             Resource.Error(e.localizedMessage ?: "Unexpected Error")
         }
