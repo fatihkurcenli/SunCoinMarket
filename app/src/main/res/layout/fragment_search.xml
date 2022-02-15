@@ -7,11 +7,11 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".features.feature_search.presentation.SearchFragment"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:context=".features.feature_search.presentation.SearchFragment">
 
         <TextView
             android:id="@+id/textView6"
@@ -49,24 +49,23 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_recyclerview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_marginTop="8dp"
+            android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView" />
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
+        <include
             android:id="@+id/loading_progress_bar"
-            android:layout_width="wrap_content"
+            layout="@layout/custom_loading_animation"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:trackColor="@color/purple_200"
+            android:layout_width="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView" />
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

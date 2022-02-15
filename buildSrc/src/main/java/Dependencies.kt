@@ -91,3 +91,7 @@ object ApiUrl {
 object Lottie {
     const val lottieAnimation = "com.airbnb.android:lottie:${VersionsLb.lottieVersion}"
 }
+
+object ChartLibrary {
+    const val chart = "com.github.AAChartModel:AAChartCore-Kotlin:${VersionsLb.chartVersion}"
+}

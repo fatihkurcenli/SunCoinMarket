@@ -50,4 +50,7 @@ object VersionsLb {
     //lottie
     const val lottieVersion = "4.2.1"
 
+    //chart
+    const val chartVersion = "6.0.0"
+
 }
