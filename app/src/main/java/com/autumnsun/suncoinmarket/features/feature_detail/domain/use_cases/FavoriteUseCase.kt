@@ -10,14 +10,16 @@ class FavoriteUseCase(
     private val repository: DetailRepository
 ) {
 
-    operator fun invoke(favoriteCoin: FavoriteCoinModel): Flow<Resource<String>> = flow {
+    operator fun invoke(favoriteCoin: FavoriteCoinModel): Flow<Resource<Boolean>> = flow {
         emit(Resource.Loading())
         val success = repository.favoriteCoin(favoriteCoin)
         if (success.message?.isNotBlank() == true) {
             emit(Resource.Error(success.message))
         }
         if (success.data == true) {
-            emit(Resource.Success("Success Favorite Coin: ${favoriteCoin.coinName}"))
+            emit(Resource.Success(true))
+        } else {
+            emit(Resource.Success(false))
         }
     }
 }

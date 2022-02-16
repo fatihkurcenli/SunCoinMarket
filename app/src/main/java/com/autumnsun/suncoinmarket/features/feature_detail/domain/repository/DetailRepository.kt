@@ -7,4 +7,5 @@ import com.autumnsun.suncoinmarket.features.feature_detail.domain.data.FavoriteC
 interface DetailRepository {
     suspend fun getCoinById(id: String): Resource<CoinDetailDto>
     suspend fun favoriteCoin(favoriteModel: FavoriteCoinModel): Resource<Boolean>
+    suspend fun isFavoriteCoin(id: String): Resource<Boolean>
 }

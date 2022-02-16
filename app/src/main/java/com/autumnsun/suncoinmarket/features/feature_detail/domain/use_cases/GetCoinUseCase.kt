@@ -6,9 +6,8 @@ import com.autumnsun.suncoinmarket.features.feature_detail.domain.data.CoinDetai
 import com.autumnsun.suncoinmarket.features.feature_detail.domain.repository.DetailRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import javax.inject.Inject
 
-class GetCoinUseCase @Inject constructor(
+class GetCoinUseCase(
     private val detailRepository: DetailRepository
 ) {
     operator fun invoke(id: String?): Flow<Resource<CoinDetail>> = flow {
