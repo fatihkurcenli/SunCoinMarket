@@ -5,10 +5,11 @@ import com.autumnsun.suncoinmarket.features.feature_detail.domain.data.*
 
 fun CoinDetailDto.toCoinDetail(): CoinDetail {
     return CoinDetail(
+        id = id,
         name = name,
         symbol = symbol,
         description = description.toDescription(),
-        hashingAlgorithm = hashingAlgorithm,
+        hashingAlgorithm = hashingAlgorithm ?: "",
         image = image.toImage(),
         marketData = marketData.toMarketData(),
         lastUpdated = lastUpdated

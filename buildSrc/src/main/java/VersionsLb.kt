@@ -16,7 +16,7 @@ object VersionsLb {
     const val navVersion = "2.3.5"
 
     // Room
-    const val roomVersion = "2.3.0"
+    const val roomVersion = "2.4.1"
 
     // Hilt
     const val hiltVersion = "2.38.1"
