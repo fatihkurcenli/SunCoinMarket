@@ -10,12 +10,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/all_background_color"
+        android:orientation="vertical"
         tools:context=".presentation.search.HomeFragment">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_max"
+            android:fontFamily="@font/roboto_bold"
+            android:text="Coins"
+            android:textSize="23sp"
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_min"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </LinearLayout>

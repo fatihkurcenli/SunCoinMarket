@@ -25,7 +25,7 @@ object KtDependencies {
 }
 
 object RoomDependencies {
-    const val roomRuntimeLib = "androidx.room:room-runtime:${VersionsLb.roomVersion}"
+    const val roomRuntimeLib = "androidx.room:room-ktx:${VersionsLb.roomVersion}"
     const val roomCompilerLib = "androidx.room:room-compiler:${VersionsLb.roomVersion}"
 }
 

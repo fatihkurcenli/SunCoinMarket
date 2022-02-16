@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getAllCoins: GetAllCoins
@@ -28,22 +29,13 @@ class HomeViewModel @Inject constructor(
         get() = _startStopBoolean
 
 
-    fun startCollectData() = viewModelScope.launch(Dispatchers.IO) {
+    fun getAllData() = viewModelScope.launch(Dispatchers.IO) {
         getAllCoins().cachedIn(viewModelScope).collectLatest { pagingData ->
             _homeModel.value = pagingData
         }
-        /*while (startStopBoolean.value) {
-
-           // delay(1000L)
-        }*/
     }
 
-    fun startLifeCycle() = viewModelScope.launch(Dispatchers.IO) {
-        _startStopBoolean.value = true
+    fun startStopBoolean(isStartStop: Boolean) = viewModelScope.launch {
+        _startStopBoolean.value = isStartStop
     }
-
-    fun stopLifeCycle() = viewModelScope.launch(Dispatchers.IO) {
-        _startStopBoolean.value = false
-    }
-
 }

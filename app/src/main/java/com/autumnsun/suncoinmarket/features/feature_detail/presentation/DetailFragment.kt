@@ -1,16 +1,19 @@
 package com.autumnsun.suncoinmarket.features.feature_detail.presentation
 
+import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.autumnsun.suncoinmarket.R
 import com.autumnsun.suncoinmarket.core.base.BaseFragment
 import com.autumnsun.suncoinmarket.core.utils.animateAlpha
 import com.autumnsun.suncoinmarket.databinding.FragmentDetailBinding
 import com.autumnsun.suncoinmarket.features.feature_detail.domain.data.CoinDetail
+import com.autumnsun.suncoinmarket.features.feature_detail.domain.data.FavoriteCoinModel
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartStackingType
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
@@ -22,13 +25,30 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_detail) {
-
     private val viewModel by viewModels<DetailViewModel>()
-
     private val safeVarargs: DetailFragmentArgs by navArgs()
 
-
     override fun initializeUi() {
+        detailStateObserver()
+        favoriteStateObserver()
+        super.initializeUi()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.toolBar.backButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        binding.toolBar.favoriteAddButton.setOnClickListener {
+            viewModel.detailState.value.detailModel?.let {
+                val favoriteCoinModel = FavoriteCoinModel(it.id, it.name, it.image.large)
+                viewModel.setFavoriteCoin(favoriteCoinModel)
+            }
+        }
+    }
+
+    private fun detailStateObserver() {
         lifecycleScope.launch {
             viewModel.detailState.collectLatest { state ->
                 if (state.isLoading) {
@@ -53,14 +73,41 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
             }
         }
         viewModel.getDetailCoin(safeVarargs.coin.id)
-        super.initializeUi()
     }
+
+    private fun favoriteStateObserver() {
+        lifecycleScope.launch {
+            viewModel.favoriteState.collectLatest { state ->
+                if (state.isLoading) {
+                    binding.toolBar.apply {
+                        favoriteAddButton.isVisible = false
+                        loadingProgressBar.customLoadingAnimation.isVisible = true
+                    }
+                } else {
+                    if (state.success) {
+                        binding.toolBar.apply {
+                            //favoriteAddButton.isVisible = true
+                            loadingProgressBar.customLoadingAnimation.isVisible = false
+                            favoriteAddButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
+                            favoriteAddButton.animateAlpha(View.VISIBLE, 1000L)
+                        }
+                    }
+                    if (state.failedMessage.isNotBlank()) {
+                        showSnackBar(state.failedMessage)
+                        binding.toolBar.loadingProgressBar.customLoadingAnimation.isVisible = false
+                    }
+                }
+            }
+        }
+    }
+
 
     private fun setLineChart(detailModel: CoinDetail) {
         val aaChartModel = customScatterChartMarkerSymbolContent(detailModel)
         aaChartModel.chartType(AAChartType.Line)
         binding.chartView.aa_drawChartWithChartModel(aaChartModel)
     }
+
 
     private fun customScatterChartMarkerSymbolContent(detailModel: CoinDetail): AAChartModel {
         if (detailModel.marketData.sparkline.price != null) {
@@ -74,9 +121,12 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
                 .backgroundColor(
                     ContextCompat.getColor(
                         requireContext(),
-                        R.color.detail_background
+                        R.color.all_background_color
                     )
                 )
+                .colorsTheme(arrayOf("#F9B770", "#ffc069", "#06caf4", "#7dffc0"))
+                .animationDuration(1000)
+                .yAxisTitle("")
                 .subtitle(detailModel.symbol)
                 .yAxisGridLineWidth(0f)
                 .stacking(AAChartStackingType.Normal)

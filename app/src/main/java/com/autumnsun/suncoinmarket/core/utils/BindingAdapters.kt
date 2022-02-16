@@ -1,10 +1,8 @@
 package com.autumnsun.suncoinmarket.core.utils
 
-import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.text.HtmlCompat
-import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import com.autumnsun.suncoinmarket.R
 import com.bumptech.glide.Glide
@@ -85,10 +83,22 @@ fun AppCompatTextView.doubleToString(
 
 @BindingAdapter("setArrow")
 fun ImageView.setArrow(
-    getCoinData: Double
+    getCoinData: Double?
 ) {
-    this.setBackgroundResource(if (getCoinData > 0) R.drawable.ic_arrow_up else R.drawable.ic_arrow_down)
+    getCoinData?.let {
+        this.setBackgroundResource(if (getCoinData > 0) R.drawable.ic_arrow_up else R.drawable.ic_arrow_down)
+    }
 }
+
+@BindingAdapter("setArrowBlack")
+fun ImageView.setArrowBlack(
+    getCoinData: Double?
+) {
+    getCoinData?.let {
+        this.setBackgroundResource(if (getCoinData > 0) R.drawable.ic_arrow_up_black else R.drawable.ic_arrow_down_black)
+    }
+}
+
 
 @BindingAdapter(value = ["currentValuePrice"])
 fun AppCompatTextView.setCurrentValuePrice(
@@ -109,31 +119,21 @@ fun AppCompatTextView.setCurrentPriceUpgradeOrDown(
 fun AppCompatTextView.setHtmlDescription(
     description: String?
 ) {
-    if (description != null) {
-        if (this.visibility == View.GONE) {
-            this.isVisible = true
-            this.text = HtmlCompat.fromHtml(description, HtmlCompat.FROM_HTML_MODE_COMPACT)
-        }
-    } else {
-        this.isVisible = false
-    }
+    description?.let {
+        this.text = HtmlCompat.fromHtml(description, HtmlCompat.FROM_HTML_MODE_COMPACT)
+    } ?: ""
 }
 
 @BindingAdapter(value = ["checkNullVisible"])
 fun ImageView.checkNullVisible(
     imageUrl: String?,
 ) {
-    if (imageUrl != null) {
-        if (this.visibility == View.GONE) {
-            this.isVisible = true
-            Glide.with(this.context)
-                .load(imageUrl)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .transform(CenterInside(), RoundedCorners(24))
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(this)
-        }
-    } else {
-        this.isVisible = false
+    imageUrl?.let {
+        Glide.with(this.context)
+            .load(it)
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .transform(CenterInside(), RoundedCorners(24))
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .into(this)
     }
 }
