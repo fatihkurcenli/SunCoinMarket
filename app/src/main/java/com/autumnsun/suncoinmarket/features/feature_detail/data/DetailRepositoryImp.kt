@@ -1,6 +1,7 @@
 package com.autumnsun.suncoinmarket.features.feature_detail.data
 
 import com.autumnsun.suncoinmarket.core.util.Resource
+import com.autumnsun.suncoinmarket.core.utils.Constants.FIREBASE_COLLECTION_FAVORITE_LIST
 import com.autumnsun.suncoinmarket.core.utils.Constants.FIREBASE_COLLECTION_USERS
 import com.autumnsun.suncoinmarket.data.local.dao.CoinDao
 import com.autumnsun.suncoinmarket.data.remote.CryptoApi
@@ -45,7 +46,7 @@ class DetailRepositoryImp @Inject constructor(
             val updateFavoriteList = localDb.getFavoriteCoins()
             firebaseAuth.currentUser?.uid.let { userId ->
                 firebaseDb.collection(FIREBASE_COLLECTION_USERS).document(userId!!)
-                    .update("favoriteList", updateFavoriteList)
+                    .update(FIREBASE_COLLECTION_FAVORITE_LIST, updateFavoriteList)
                     .addOnSuccessListener {
                         operationSuccessful = true
                     }.addOnFailureListener {

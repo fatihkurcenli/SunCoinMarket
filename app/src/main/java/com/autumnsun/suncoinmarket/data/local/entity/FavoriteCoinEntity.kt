@@ -9,4 +9,5 @@ data class FavoriteCoinEntity(
     val id: String,
     val coinName: String,
     val imageUrl: String,
+    val symbol: String
 )

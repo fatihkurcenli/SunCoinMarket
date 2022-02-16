@@ -42,7 +42,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
 
         binding.toolBar.favoriteAddButton.setOnClickListener {
             viewModel.detailState.value.detailModel?.let {
-                val favoriteCoinModel = FavoriteCoinModel(it.id, it.name, it.image.large)
+                val favoriteCoinModel = FavoriteCoinModel(it.id, it.name, it.image.large, it.symbol)
                 viewModel.setFavoriteCoin(favoriteCoinModel)
             }
         }
