@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="favoriteCoin"
+            type="com.autumnsun.suncoinmarket.features.feature_detail.domain.data.FavoriteCoinModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_medium">
+
+        <ImageView
+            android:id="@+id/crypto_image_view"
+            roundedImage24="@{favoriteCoin.imageUrl}"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@{favoriteCoin.coinName}"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/crypto_image_view"
+            app:layout_constraintTop_toTopOf="@+id/crypto_image_view"
+            tools:text="Bitcoin" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@{favoriteCoin.symbol}"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/crypto_image_view"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
+            tools:text="BTC" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
