@@ -7,6 +7,7 @@ import com.autumnsun.suncoinmarket.features.feature_detail.domain.repository.Det
 import com.autumnsun.suncoinmarket.features.feature_detail.domain.use_cases.DetailUseCases
 import com.autumnsun.suncoinmarket.features.feature_detail.domain.use_cases.FavoriteUseCase
 import com.autumnsun.suncoinmarket.features.feature_detail.domain.use_cases.GetCoinUseCase
+import com.autumnsun.suncoinmarket.features.feature_detail.domain.use_cases.IsFavoriteUseCase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.Module
@@ -38,7 +39,8 @@ object DetailModule {
     ): DetailUseCases {
         return DetailUseCases(
             getCoinUseCase = GetCoinUseCase(detailRepository),
-            favoriteUseCase = FavoriteUseCase(detailRepository)
+            favoriteUseCase = FavoriteUseCase(detailRepository),
+            isFavoriteUseCase = IsFavoriteUseCase(detailRepository)
         )
     }
 }

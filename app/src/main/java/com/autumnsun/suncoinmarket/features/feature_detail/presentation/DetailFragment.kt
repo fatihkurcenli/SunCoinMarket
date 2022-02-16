@@ -31,7 +31,21 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
     override fun initializeUi() {
         detailStateObserver()
         favoriteStateObserver()
+        checkFavoriteAlready()
         super.initializeUi()
+    }
+
+    private fun checkFavoriteAlready() {
+        safeVarargs.coin.id?.let { viewModel.checkFavoriteState(it) }
+        lifecycleScope.launch {
+            viewModel.initFavorite.collectLatest {
+                if (viewModel.initFavorite.value) {
+                    binding.toolBar.favoriteAddButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
+                } else {
+                    binding.toolBar.favoriteAddButton.setBackgroundResource(R.drawable.ic_un_favorite)
+                }
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -86,28 +100,35 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
                 } else {
                     if (state.success) {
                         binding.toolBar.apply {
-                            //favoriteAddButton.isVisible = true
+                            if (state.isFavorite) {
+                                favoriteAddButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
+                            } else {
+                                favoriteAddButton.setBackgroundResource(R.drawable.ic_un_favorite)
+                            }
                             loadingProgressBar.customLoadingAnimation.isVisible = false
-                            favoriteAddButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
                             favoriteAddButton.animateAlpha(View.VISIBLE, 1000L)
                         }
                     }
                     if (state.failedMessage.isNotBlank()) {
                         showSnackBar(state.failedMessage)
                         binding.toolBar.loadingProgressBar.customLoadingAnimation.isVisible = false
+                        binding.toolBar.favoriteAddButton.isVisible = true
+                        binding.toolBar.apply {
+                            loadingProgressBar.customLoadingAnimation.isVisible = false
+                            favoriteAddButton.isVisible = true
+                            favoriteAddButton.setBackgroundResource(R.drawable.ic_baseline_favorite_24)
+                        }
                     }
                 }
             }
         }
     }
 
-
     private fun setLineChart(detailModel: CoinDetail) {
         val aaChartModel = customScatterChartMarkerSymbolContent(detailModel)
         aaChartModel.chartType(AAChartType.Line)
         binding.chartView.aa_drawChartWithChartModel(aaChartModel)
     }
-
 
     private fun customScatterChartMarkerSymbolContent(detailModel: CoinDetail): AAChartModel {
         if (detailModel.marketData.sparkline.price != null) {

@@ -8,10 +8,7 @@ import com.autumnsun.suncoinmarket.features.feature_detail.domain.data.FavoriteC
 import com.autumnsun.suncoinmarket.features.feature_detail.domain.use_cases.DetailUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,6 +26,9 @@ class DetailViewModel @Inject constructor(
     val favoriteState: StateFlow<FavoriteUiState>
         get() = _favoriteState
 
+    private val _initFavorite = MutableStateFlow(false)
+    val initFavorite: StateFlow<Boolean>
+        get() = _initFavorite
 
     init {
         val getId = savedStateHandle.get("id") ?: ""
@@ -66,7 +66,7 @@ class DetailViewModel @Inject constructor(
             when (result) {
                 is Resource.Success -> {
                     _favoriteState.value = favoriteState.value.copy(
-                        successMessage = result.data!!,
+                        isFavorite = result.data ?: false,
                         success = true,
                         isLoading = false,
                     )
@@ -79,11 +79,18 @@ class DetailViewModel @Inject constructor(
                 is Resource.Error -> {
                     _favoriteState.value = favoriteState.value.copy(
                         isLoading = false,
+                        isFavorite = result.data ?: false,
                         failedMessage = result.message!!
                     )
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    fun checkFavoriteState(id: String) = viewModelScope.launch {
+        detailUseCases.isFavoriteUseCase(id).collectLatest {
+            _initFavorite.value = it
+        }
     }
 
 }
