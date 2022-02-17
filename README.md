@@ -17,6 +17,11 @@
 
 > SunCoinMarket mobile application target Android 5.0 (API 21) or higher versions.
 
+      
+<br>
+
+[![image alt text](https://user-images.githubusercontent.com/34714108/154484553-8c4f132a-cc1e-4ea3-b820-13f0c958f0d1.png)](https://github.com/fatihkurcenli/SunCoinMarket/blob/master/apk/app-release.apk)
+     
  <br>
 
 # **[Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)**
