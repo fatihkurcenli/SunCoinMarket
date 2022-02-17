@@ -193,7 +193,42 @@
                 <com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
                     android:id="@+id/chart_view"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp" />
+                    android:layout_height="@dimen/chart_dimen" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_medium"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_refresh_timer_black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/refresh_interval_page_edit_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_medium"
+                        android:background="@null"
+                        android:fontFamily="@font/roboto_medium"
+                        android:hint="10sn"
+                        android:inputType="number"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:id="@+id/change_refresh_time_button"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginHorizontal="@dimen/margin_big"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone" />
+                </LinearLayout>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     setHtmlDescription="@{coinDetailModel.description.en}"

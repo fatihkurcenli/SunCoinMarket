@@ -25,4 +25,6 @@
     <string name="sign_in_now">Sign in Now</string>
     <string name="you_already_have_an_account">You already have an Account ?</string>
     <string name="login_expired">Your login time has expired. Login again</string>
+    <string name="changed_refresh_time">Successfully Updated</string>
+
 </resources>

@@ -5,11 +5,13 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.autumnsun.suncoinmarket.R
 import com.autumnsun.suncoinmarket.core.base.BaseFragment
 import com.autumnsun.suncoinmarket.databinding.FragmentFavoriteBinding
+import com.autumnsun.suncoinmarket.features.feature_favorite.data.mapper.toCoin
 import com.autumnsun.suncoinmarket.features.feature_favorite.presentation.adapter.FavoriteAdapter
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,8 +49,10 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>(R.layout.fragment
     }
 
     private fun createRecyclerView() {
-        favoriteAdapter = FavoriteAdapter {
-            //TODO navigation detail
+        favoriteAdapter = FavoriteAdapter { favoriteModel ->
+            val navigation =
+                FavoriteFragmentDirections.actionFavoriteFragmentToDetailFragment(favoriteModel.toCoin())
+            findNavController().navigate(navigation)
         }
         binding.recyclerview.apply {
             addItemDecoration(

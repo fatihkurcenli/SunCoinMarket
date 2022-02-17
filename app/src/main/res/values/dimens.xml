@@ -4,4 +4,5 @@
     <dimen name="margin_medium">8dp</dimen>
     <dimen name="margin_big">16dp</dimen>
     <dimen name="margin_max">24dp</dimen>
+    <dimen name="chart_dimen">300dp</dimen>
 </resources>
