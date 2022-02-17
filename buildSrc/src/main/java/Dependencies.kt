@@ -8,9 +8,10 @@ object AndroidDependencies {
         "org.jetbrains.kotlinx:kotlinx-coroutines-android:${VersionsLb.coroutinesVersion}"
     const val lifecycleKtxLib =
         "androidx.lifecycle:lifecycle-runtime-ktx:${VersionsLb.lifecycleVersion}"
-
-    // UI
-    const val materialLib = "com.google.android.material:material:${VersionsLb.materialVersion}"
+    const val legacySupportLib ="androidx.legacy:legacy-support-v4:${VersionsLb.legacySupportVersion}"
+        // UI
+        const
+    val materialLib = "com.google.android.material:material:${VersionsLb.materialVersion}"
     const val constraintLib =
         "androidx.constraintlayout:constraintlayout:${VersionsLb.constraintVersion}"
 

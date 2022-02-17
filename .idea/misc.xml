@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/fatih/Documents/SunCoinMarket/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1995" />
         <entry key="..\:/Users/fatih/Documents/SunCoinMarket/app/src/main/res/drawable/card_view.xml" value="0.3335" />
         <entry key="..\:/Users/fatih/Documents/SunCoinMarket/app/src/main/res/drawable/ic_arrow_down.xml" value="0.342" />
         <entry key="..\:/Users/fatih/Documents/SunCoinMarket/app/src/main/res/drawable/ic_arrow_up.xml" value="0.3335" />
         <entry key="..\:/Users/fatih/Documents/SunCoinMarket/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.2705" />
+        <entry key="..\:/Users/fatih/Documents/SunCoinMarket/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1995" />
+        <entry key="..\:/Users/fatih/Documents/SunCoinMarket/app/src/main/res/drawable/ic_refresh_timer_black.xml" value="0.2915" />
         <entry key="..\:/Users/fatih/Documents/SunCoinMarket/app/src/main/res/drawable/ic_search.xml" value="0.1755" />
         <entry key="..\:/Users/fatih/Documents/SunCoinMarket/app/src/main/res/drawable/ic_un_favorite.xml" value="0.2705" />
         <entry key="..\:/Users/fatih/Documents/SunCoinMarket/app/src/main/res/drawable/item_selector.xml" value="0.3255" />
@@ -17,7 +20,7 @@
         <entry key="..\:/Users/fatih/Documents/SunCoinMarket/app/src/main/res/layout/custom_loading_animation.xml" value="0.31197916666666664" />
         <entry key="..\:/Users/fatih/Documents/SunCoinMarket/app/src/main/res/layout/detail_tool_bar.xml" value="0.5" />
         <entry key="..\:/Users/fatih/Documents/SunCoinMarket/app/src/main/res/layout/favorite_list_item.xml" value="0.4682080924855491" />
-        <entry key="..\:/Users/fatih/Documents/SunCoinMarket/app/src/main/res/layout/fragment_detail.xml" value="0.67" />
+        <entry key="..\:/Users/fatih/Documents/SunCoinMarket/app/src/main/res/layout/fragment_detail.xml" value="0.564844587352626" />
         <entry key="..\:/Users/fatih/Documents/SunCoinMarket/app/src/main/res/layout/fragment_favorite.xml" value="0.21354166666666666" />
         <entry key="..\:/Users/fatih/Documents/SunCoinMarket/app/src/main/res/layout/fragment_first.xml" value="0.3359375" />
         <entry key="..\:/Users/fatih/Documents/SunCoinMarket/app/src/main/res/layout/fragment_home.xml" value="0.33" />

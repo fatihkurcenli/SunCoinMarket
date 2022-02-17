@@ -1,7 +1,7 @@
 package com.autumnsun.suncoinmarket.features.feature_favorite.data
 
-import android.util.Log
 import com.autumnsun.suncoinmarket.core.util.Resource
+import com.autumnsun.suncoinmarket.core.utils.Constants.FIREBASE_COLLECTION_USERS
 import com.autumnsun.suncoinmarket.features.feature_auth.data.UserModel
 import com.autumnsun.suncoinmarket.features.feature_detail.domain.data.FavoriteCoinModel
 import com.autumnsun.suncoinmarket.features.feature_favorite.domain.repository.FavoriteRepository
@@ -22,15 +22,13 @@ class FavoriteRepositoryImpl @Inject constructor(
         callbackFlow {
             send(Resource.Loading())
             firebaseAuth.currentUser?.uid.let {
-                val snapshotListener = firebaseDb.collection("users")
+                val snapshotListener = firebaseDb.collection(FIREBASE_COLLECTION_USERS)
                     .document(it!!)
                     .addSnapshotListener { snapshot, e ->
                         val response = if (snapshot != null) {
                             val userInfo = snapshot.toObject(UserModel::class.java)
-                            Log.d("successRepository", userInfo.toString())
                             Resource.Success(userInfo!!.favoriteCoinList)
                         } else {
-                            Log.d("errorRepository", e?.localizedMessage.toString())
                             Resource.Error(e?.message ?: e.toString())
                         }
                         trySend(response).isSuccess

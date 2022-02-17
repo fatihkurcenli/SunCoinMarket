@@ -1,6 +1,7 @@
 package com.autumnsun.suncoinmarket.di
 
 import android.content.SharedPreferences
+import com.autumnsun.suncoinmarket.data.local.dao.CoinDao
 import com.autumnsun.suncoinmarket.features.feature_auth.data.AuthRepositoryImp
 import com.autumnsun.suncoinmarket.features.feature_auth.domain.repository.AuthRepository
 import com.autumnsun.suncoinmarket.features.feature_auth.domain.use_case.AuthUseCases
@@ -21,12 +22,16 @@ object AuthModule {
     @Provides
     @Singleton
     fun provideAuthRepository(
-        sharedPreferences: SharedPreferences
+        firebaseAuth: FirebaseAuth,
+        firebaseDb: FirebaseFirestore,
+        sharedPreferences: SharedPreferences,
+        localDb: CoinDao
     ): AuthRepository {
         return AuthRepositoryImp(
-            firebaseAuth = FirebaseAuth.getInstance(),
-            firebaseDb = FirebaseFirestore.getInstance(),
-            sharedPreferences = sharedPreferences
+            firebaseAuth = firebaseAuth,
+            firebaseDb = firebaseDb,
+            sharedPreferences = sharedPreferences,
+            localDb = localDb
         )
     }
 

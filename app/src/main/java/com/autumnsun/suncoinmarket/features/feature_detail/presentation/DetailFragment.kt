@@ -1,16 +1,22 @@
 package com.autumnsun.suncoinmarket.features.feature_detail.presentation
 
+import android.annotation.SuppressLint
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.autumnsun.suncoinmarket.R
 import com.autumnsun.suncoinmarket.core.base.BaseFragment
+import com.autumnsun.suncoinmarket.core.utils.Constants.REFRESH_PAGE
 import com.autumnsun.suncoinmarket.core.utils.animateAlpha
+import com.autumnsun.suncoinmarket.core.utils.hideKeyboard
 import com.autumnsun.suncoinmarket.databinding.FragmentDetailBinding
 import com.autumnsun.suncoinmarket.features.feature_detail.domain.data.CoinDetail
 import com.autumnsun.suncoinmarket.features.feature_detail.domain.data.FavoriteCoinModel
@@ -22,18 +28,25 @@ import com.github.aachartmodel.aainfographics.aaoptionsmodel.AAMarker
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_detail) {
     private val viewModel by viewModels<DetailViewModel>()
     private val safeVarargs: DetailFragmentArgs by navArgs()
 
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
+
     override fun initializeUi() {
         detailStateObserver()
         favoriteStateObserver()
         checkFavoriteAlready()
+        refreshIntervalPage()
+        changeRefreshTimeWidget()
         super.initializeUi()
     }
+
 
     private fun checkFavoriteAlready() {
         safeVarargs.coin.id?.let { viewModel.checkFavoriteState(it) }
@@ -140,10 +153,7 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
                 .chartType(AAChartType.Scatter)
                 .title(detailModel.name)
                 .backgroundColor(
-                    ContextCompat.getColor(
-                        requireContext(),
-                        R.color.all_background_color
-                    )
+                    ContextCompat.getColor(requireContext(), R.color.all_background_color)
                 )
                 .colorsTheme(arrayOf("#F9B770", "#ffc069", "#06caf4", "#7dffc0"))
                 .animationDuration(1000)
@@ -156,5 +166,41 @@ class DetailFragment : BaseFragment<FragmentDetailBinding>(R.layout.fragment_det
         } else {
             return AAChartModel()
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun refreshIntervalPage() {
+        val refreshPageValue = sharedPreferences.getInt(REFRESH_PAGE, 10)
+        binding.refreshIntervalPageEditView.hint = refreshPageValue.toString() + "sn"
+    }
+
+    private fun changeRefreshTimeWidget() {
+        binding.refreshIntervalPageEditView.doAfterTextChanged { text ->
+            if (text.toString().isNotEmpty()) {
+                binding.changeRefreshTimeButton.isVisible = true
+            }
+        }
+
+        binding.refreshIntervalPageEditView.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                hideKeyboard()
+                changeRefreshTimeFun()
+            }
+            true
+        }
+
+        binding.changeRefreshTimeButton.setOnClickListener {
+            changeRefreshTimeFun()
+            hideKeyboard()
+        }
+    }
+
+    private fun changeRefreshTimeFun() {
+        sharedPreferences.edit()
+            .putInt(REFRESH_PAGE, binding.refreshIntervalPageEditView.text.toString().toInt())
+            .apply()
+        showSnackBar(getString(R.string.changed_refresh_time))
+        binding.changeRefreshTimeButton.isVisible = false
+        refreshIntervalPage()
     }
 }

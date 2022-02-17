@@ -4,16 +4,17 @@ object VersionsLb {
 
     // Androidx
     const val coreVersion = "1.7.0"
-    const val appcompatVersion = "1.4.0"
+    const val appcompatVersion = "1.4.1"
     const val coroutinesVersion = "1.3.9"
     const val lifecycleVersion = "2.4.0"
+    const val legacySupportVersion = "1.0.0"
 
     // Android - UI
-    const val materialVersion = "1.4.0"
-    const val constraintVersion = "2.1.2"
+    const val materialVersion = "1.5.0"
+    const val constraintVersion = "2.1.3"
 
     // Navigation
-    const val navVersion = "2.3.5"
+    const val navVersion = "2.4.1"
 
     // Room
     const val roomVersion = "2.4.1"
