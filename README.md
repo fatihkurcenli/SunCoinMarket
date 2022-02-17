@@ -51,6 +51,15 @@
 <li><a href="https://firebase.google.com/products/auth">Firebase Authentication</a> & <a href="https://firebase.google.com/products/firestore">Cloud Firestore</a> </li>
 
  <br>
+      
+![summary](https://user-images.githubusercontent.com/34714108/154481188-ed3e4857-4c18-43e4-90b4-f1cd26a3af5f.png)
+
+![kotlin](https://user-images.githubusercontent.com/34714108/154481257-fdf46a30-26d5-4735-9c25-28b73215fc4b.png)
+
+![studio](https://user-images.githubusercontent.com/34714108/154481260-1bf73ba6-7937-4cc3-904c-55c3d5bb5d24.png)
+
+![jetpack](https://user-images.githubusercontent.com/34714108/154481249-b72acf7c-a5d8-4310-987e-951c928463ec.png)
+
 
 ## **License & Copyright**
 
